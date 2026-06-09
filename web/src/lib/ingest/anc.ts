@@ -176,8 +176,8 @@ export async function ensureFuente(): Promise<{id: string}> {
       tipoIntegracion: 'indexada',
       frecuenciaActualizacion: 'anual'
     })
-    .returning({id: schema.fuente.id});
-  return created;
+    .returning();
+  return {id: created.id};
 }
 
 export type IngestResult = {
@@ -232,7 +232,7 @@ export async function ingest({
             datosCompletos: sql`excluded.datos_completos`
           }
         })
-        .returning({id: schema.registroIndice.id});
+        .returning();
       rowsInsertedOrUpdated += inserted.length;
     }
 

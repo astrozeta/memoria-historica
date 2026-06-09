@@ -154,8 +154,8 @@ export async function ensureFuente(): Promise<{id: string}> {
       tipoIntegracion: 'indexada',
       frecuenciaActualizacion: 'semanal'
     })
-    .returning({id: schema.fuente.id});
-  return created;
+    .returning();
+  return {id: created.id};
 }
 
 async function fetchAll(): Promise<GogoraRow[]> {
@@ -224,7 +224,7 @@ export async function ingest({
           datosCompletos: sql`excluded.datos_completos`
         }
       })
-      .returning({id: schema.registroIndice.id});
+      .returning();
     rowsInsertedOrUpdated += inserted.length;
     chunks += 1;
   }
