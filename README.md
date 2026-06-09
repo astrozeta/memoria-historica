@@ -2,7 +2,9 @@
 
 Aplicación web pública y sin ánimo de lucro para ayudar a familiares de personas desaparecidas durante la Guerra Civil española y la posguerra a averiguar qué ocurrió con sus seres queridos.
 
-**Estado:** en construcción. Scaffolding del paso 3 del roadmap. No desplegado todavía.
+**Estado:** scaffolding del MVP en producción — https://memoria-historica.netlify.app
+
+Aún no hay funcionalidad de búsqueda ni ingesta de datasets; solo la pantalla de bienvenida traducida a los cuatro idiomas. La base de datos y la infraestructura están listas para la siguiente fase.
 
 ## Qué hace
 

@@ -185,19 +185,24 @@ Para el MVP, mostrar todos los candidatos con score y dejar al usuario decidir. 
 
 ## 10. Estado actual del scaffolding (2026-06-09)
 
-Lo que ya está en el repo (commit `a589a08`):
+**El MVP base está vivo en producción** — https://memoria-historica.netlify.app
 
+Lo que está hecho:
+
+- **Repositorio público** en https://github.com/astrozeta/memoria-historica con auto-deploy a Netlify en cada push a `main`.
+- **Sitio en Netlify** (`memoria-historica.netlify.app`) en el team Interfase, build en runners Linux.
+- **Base de datos Netlify DB** (Postgres serverless, powered by Neon) **aprovisionada**. La URL se inyecta como `NETLIFY_DATABASE_URL` en runtime de funciones.
+- **Migración 0001_init aplicada** en producción: 8 tablas, 7 enums, FKs, índices y las 4 extensiones (`postgis`, `pg_trgm`, `unaccent`, `fuzzystrmatch`).
 - **Estructura `web/`** con Next.js 16 + React 19 + TypeScript + Tailwind 4 (App Router).
-- **i18n configurada** con `next-intl`: rutas `/[locale]/`, middleware, mensajes en `es/ca/gl/eu`. Página de bienvenida traducible verificada.
-- **Schema Drizzle completo** en `web/src/db/schema.ts`: las 8 entidades del modelo de datos + 7 enums + custom type PostGIS.
-- **Primera migración SQL** generada en `web/drizzle/0000_init.sql`. Incluye `CREATE EXTENSION` para `postgis`, `pg_trgm`, `unaccent`, `fuzzystrmatch`.
+- **i18n verificada en producción**: `/es`, `/ca`, `/gl`, `/eu` sirven correctamente sus traducciones; `/` redirige a `/es`.
+- **Configuración de monorepo en Netlify**: `netlify.toml` en la raíz con `base = "web"`, build command `pnpm install --ignore-scripts && pnpm run build`.
 - **Scripts npm** para gestión de BD: `db:generate`, `db:migrate`, `db:push`, `db:studio`.
-- **Configuración base** de despliegue: `.env.example`, `LICENSE` MIT, `README.md`.
+- **Licencia MIT + README + .env.example** publicados.
 
-Pendiente de Nacho para activar la BD:
-1. Provisionar Netlify DB (o Neon directo) desde el dashboard de Netlify.
-2. Copiar la `DATABASE_URL` resultante en un archivo `web/.env.local`.
-3. Ejecutar `pnpm db:migrate` para aplicar el schema.
+Detalles técnicos resueltos:
+- pnpm 11 sale con exit 1 si tiene "ignored build scripts" pendientes de aprobar. La flag `--ignore-scripts` en el install de CI lo evita. Trade-off: sharp y otros binarios nativos no se compilan, aceptable en esta fase.
+- Las migraciones se aplican automáticamente al desplegar; no hay paso manual de `db:migrate` contra la BD remota.
+- El plugin `@netlify/plugin-nextjs` falla en Windows con symlinks; por eso el build se ejecuta solo en runners Linux (deploy desde GitHub, no desde local).
 
 ## 11. Siguientes pasos concretos
 
