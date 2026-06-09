@@ -1,0 +1,17 @@
+{
+  "site": {
+    "name": "Memoria Histórica",
+    "tagline": "Axudamos a atopar a quen non volveu."
+  },
+  "home": {
+    "intro": "Unha ferramenta gratuíta e sen ánimo de lucro para que as familias de persoas desaparecidas durante a Guerra Civil española e a posguerra poidan saber que aconteceu cos seus seres queridos.",
+    "ctaSearchTitle": "Busco a alguén",
+    "ctaSearchDescription": "Crea unha ficha co que saibas e deixamos que a app busque nos arquivos dispoñibles.",
+    "ctaGuideTitle": "Non sei por onde empezar",
+    "ctaGuideDescription": "Guiámoste paso a paso segundo o caso do teu familiar."
+  },
+  "common": {
+    "loading": "Cargando…",
+    "error": "Algo saíu mal."
+  }
+}

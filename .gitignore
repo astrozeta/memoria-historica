@@ -1,0 +1,56 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Next.js
+web/.next/
+web/out/
+web/build/
+
+# Production
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Local env
+.env
+.env.local
+.env*.local
+*.env
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Test coverage
+coverage/
+
+# Data ingestion working files (no commitear datasets descargados)
+data/raw/
+data/tmp/
+*.csv
+*.xlsx
+*.xls
+*.xml
+*.json.gz
+
+# Pero sí queremos commitear schemas y configuraciones JSON
+!web/**/*.json
+!docs/**/*.json
+!data/schemas/**/*.json
+
+# Backups y volcados DB
+*.sql.gz
+*.dump
+
+# Sentry / observabilidad
+.sentryclirc

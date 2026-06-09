@@ -1,0 +1,17 @@
+{
+  "site": {
+    "name": "Memòria Històrica",
+    "tagline": "Ajudem a trobar els qui no van tornar."
+  },
+  "home": {
+    "intro": "Una eina gratuïta i sense ànim de lucre perquè les famílies de persones desaparegudes durant la Guerra Civil espanyola i la postguerra puguin esbrinar què va passar amb els seus éssers estimats.",
+    "ctaSearchTitle": "Busco algú",
+    "ctaSearchDescription": "Crea una fitxa amb el que sàpigues i deixem que l'app cerqui als arxius disponibles.",
+    "ctaGuideTitle": "No sé per on començar",
+    "ctaGuideDescription": "Et guiem pas a pas segons el cas del teu familiar."
+  },
+  "common": {
+    "loading": "Carregant…",
+    "error": "Alguna cosa ha anat malament."
+  }
+}

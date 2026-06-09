@@ -1,0 +1,17 @@
+{
+  "site": {
+    "name": "Memoria Historikoa",
+    "tagline": "Itzuli ez zirenak aurkitzen laguntzen dugu."
+  },
+  "home": {
+    "intro": "Doako tresna bat, irabazi-asmorik gabea, Espainiako Gerra Zibilean eta gerraosteko garaian desagertu ziren pertsonen senideek beren maiteei zer gertatu zitzaien jakin dezaten.",
+    "ctaSearchTitle": "Norbait bilatu nahi dut",
+    "ctaSearchDescription": "Sortu fitxa bat dakizunarekin eta aplikazioari utziko diogu eskuragarri dauden artxiboetan bilatzen.",
+    "ctaGuideTitle": "Ez dakit nondik hasi",
+    "ctaGuideDescription": "Zure senidearen kasuaren arabera, urratsez urrats gidatuko zaitugu."
+  },
+  "common": {
+    "loading": "Kargatzen…",
+    "error": "Zerbait gaizki joan da."
+  }
+}
