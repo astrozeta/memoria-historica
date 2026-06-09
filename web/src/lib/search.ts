@@ -37,7 +37,7 @@ export const searchInputSchema = z.object({
     ])
     .optional(),
   limit: z.coerce.number().int().min(1).max(100).default(50),
-  minScore: z.coerce.number().min(0).max(1).default(0.25)
+  minScore: z.coerce.number().min(0).max(1).default(0.5)
 });
 export type SearchInput = z.infer<typeof searchInputSchema>;
 
@@ -133,7 +133,27 @@ export async function search(input: SearchInput): Promise<SearchResult[]> {
       FROM registro_indice r
       JOIN fuente f ON f.id = r.fuente_id
       WHERE
-        (${provincia}::text IS NULL OR
+        -- Prefiltro duro: el campo más identificativo aportado por el usuario
+        -- debe superar 0.5 de similitud. Sin esto, cualquier coincidencia
+        -- marginal en un único campo cuela y la lista se llena de ruido.
+        (
+          (
+            ${apellido1}::text IS NOT NULL
+            AND similarity(unaccent(lower(coalesce(r.apellido_1,''))), unaccent(lower(${apellido1}::text))) >= 0.5
+          )
+          OR (
+            ${apellido1}::text IS NULL
+            AND ${apellido2}::text IS NOT NULL
+            AND similarity(unaccent(lower(coalesce(r.apellido_2,''))), unaccent(lower(${apellido2}::text))) >= 0.5
+          )
+          OR (
+            ${apellido1}::text IS NULL
+            AND ${apellido2}::text IS NULL
+            AND ${nombre}::text IS NOT NULL
+            AND similarity(unaccent(lower(coalesce(r.nombre,''))), unaccent(lower(${nombre}::text))) >= 0.5
+          )
+        )
+        AND (${provincia}::text IS NULL OR
           unaccent(lower(coalesce(r.provincia_nacimiento,''))) = unaccent(lower(${provincia}::text))
           OR unaccent(lower(coalesce(r.provincia_desaparicion,''))) = unaccent(lower(${provincia}::text))
         )
