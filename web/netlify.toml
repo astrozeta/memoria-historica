@@ -1,0 +1,18 @@
+# Configuración de build para Netlify.
+# El `base = "web"` no se aplica aquí porque este toml ya está dentro de web/.
+# Netlify lo detecta automáticamente al estar el sitio enlazado a este directorio.
+
+[build]
+  # pnpm 11 sale con exit 1 cuando hay "ignored build scripts", aunque los hayamos
+  # listado en pnpm.onlyBuiltDependencies del package.json. --ignore-scripts evita
+  # ese comportamiento estricto durante la fase de install en CI.
+  #
+  # Trade-off: sharp y otros binarios nativos no se compilan. No es crítico en
+  # esta fase del MVP (la página de bienvenida no usa optimización de imagen).
+  # Si más adelante se necesita sharp en producción, se ajusta este comando.
+  command = "pnpm install --ignore-scripts && pnpm run build"
+  publish = ".next"
+
+[build.environment]
+  # Forzar Node 24 (LTS en uso local) para consistencia.
+  NODE_VERSION = "24"
