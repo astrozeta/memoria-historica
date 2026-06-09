@@ -183,7 +183,23 @@ Para el MVP, mostrar todos los candidatos con score y dejar al usuario decidir. 
 - **Postgres**: **Netlify DB** (Neon por debajo). Decisión #17.
 - **Repositorio**: público desde el inicio, licencia OSS permisiva (MIT o equivalente). Decisión #19.
 
-## 10. Siguientes pasos concretos
+## 10. Estado actual del scaffolding (2026-06-09)
+
+Lo que ya está en el repo (commit `a589a08`):
+
+- **Estructura `web/`** con Next.js 16 + React 19 + TypeScript + Tailwind 4 (App Router).
+- **i18n configurada** con `next-intl`: rutas `/[locale]/`, middleware, mensajes en `es/ca/gl/eu`. Página de bienvenida traducible verificada.
+- **Schema Drizzle completo** en `web/src/db/schema.ts`: las 8 entidades del modelo de datos + 7 enums + custom type PostGIS.
+- **Primera migración SQL** generada en `web/drizzle/0000_init.sql`. Incluye `CREATE EXTENSION` para `postgis`, `pg_trgm`, `unaccent`, `fuzzystrmatch`.
+- **Scripts npm** para gestión de BD: `db:generate`, `db:migrate`, `db:push`, `db:studio`.
+- **Configuración base** de despliegue: `.env.example`, `LICENSE` MIT, `README.md`.
+
+Pendiente de Nacho para activar la BD:
+1. Provisionar Netlify DB (o Neon directo) desde el dashboard de Netlify.
+2. Copiar la `DATABASE_URL` resultante en un archivo `web/.env.local`.
+3. Ejecutar `pnpm db:migrate` para aplicar el schema.
+
+## 11. Siguientes pasos concretos
 
 1. Bocetar los wireframes en una herramienta visual (Figma, Excalidraw) — opcional pero útil.
 2. Arrancar el repo público: scaffolding Next.js 15 + TypeScript + Auth.js + conexión a Netlify DB + i18n con next-intl.

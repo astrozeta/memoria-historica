@@ -1,0 +1,1026 @@
+{
+  "id": "09a0e60e-23e6-46da-b1c1-d0efedc2fa6a",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.colaborador_ficha": {
+      "name": "colaborador_ficha",
+      "schema": "",
+      "columns": {
+        "ficha_id": {
+          "name": "ficha_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "usuario_id": {
+          "name": "usuario_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "rol": {
+          "name": "rol",
+          "type": "rol_colaborador",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'lectura'"
+        },
+        "invitado_por": {
+          "name": "invitado_por",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "invitado_en": {
+          "name": "invitado_en",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "aceptado_en": {
+          "name": "aceptado_en",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "colaborador_ficha_ficha_id_ficha_id_fk": {
+          "name": "colaborador_ficha_ficha_id_ficha_id_fk",
+          "tableFrom": "colaborador_ficha",
+          "tableTo": "ficha",
+          "columnsFrom": [
+            "ficha_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "colaborador_ficha_usuario_id_usuario_id_fk": {
+          "name": "colaborador_ficha_usuario_id_usuario_id_fk",
+          "tableFrom": "colaborador_ficha",
+          "tableTo": "usuario",
+          "columnsFrom": [
+            "usuario_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "colaborador_ficha_invitado_por_usuario_id_fk": {
+          "name": "colaborador_ficha_invitado_por_usuario_id_fk",
+          "tableFrom": "colaborador_ficha",
+          "tableTo": "usuario",
+          "columnsFrom": [
+            "invitado_por"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "colaborador_ficha_ficha_id_usuario_id_pk": {
+          "name": "colaborador_ficha_ficha_id_usuario_id_pk",
+          "columns": [
+            "ficha_id",
+            "usuario_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.ficha": {
+      "name": "ficha",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "creador_id": {
+          "name": "creador_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "visibilidad": {
+          "name": "visibilidad",
+          "type": "visibilidad",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'privada'"
+        },
+        "estado": {
+          "name": "estado",
+          "type": "estado_ficha",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'recien_creada'"
+        },
+        "visibilidad_sensible": {
+          "name": "visibilidad_sensible",
+          "type": "visibilidad_sensible",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'solo_colaboradores'"
+        },
+        "datos_identidad": {
+          "name": "datos_identidad",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "datos_familia": {
+          "name": "datos_familia",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "datos_contexto": {
+          "name": "datos_contexto",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "datos_desaparicion": {
+          "name": "datos_desaparicion",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "datos_investigacion": {
+          "name": "datos_investigacion",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "creada_en": {
+          "name": "creada_en",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "actualizada_en": {
+          "name": "actualizada_en",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "ficha_creador_idx": {
+          "name": "ficha_creador_idx",
+          "columns": [
+            {
+              "expression": "creador_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "ficha_creador_id_usuario_id_fk": {
+          "name": "ficha_creador_id_usuario_id_fk",
+          "tableFrom": "ficha",
+          "tableTo": "usuario",
+          "columnsFrom": [
+            "creador_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.fuente": {
+      "name": "fuente",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "slug": {
+          "name": "slug",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nombre": {
+          "name": "nombre",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "url_origen": {
+          "name": "url_origen",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "organismo": {
+          "name": "organismo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "licencia": {
+          "name": "licencia",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "licencia_url": {
+          "name": "licencia_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tipo_integracion": {
+          "name": "tipo_integracion",
+          "type": "tipo_integracion",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'indexada'"
+        },
+        "frecuencia_actualizacion": {
+          "name": "frecuencia_actualizacion",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ultima_descarga": {
+          "name": "ultima_descarga",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "activa": {
+          "name": "activa",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "fuente_slug_unique": {
+          "name": "fuente_slug_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "slug"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.hallazgo": {
+      "name": "hallazgo",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "ficha_id": {
+          "name": "ficha_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "registro_indice_id": {
+          "name": "registro_indice_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fuente_id": {
+          "name": "fuente_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "score_confianza": {
+          "name": "score_confianza",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "url_externa": {
+          "name": "url_externa",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "estado_revision": {
+          "name": "estado_revision",
+          "type": "estado_revision",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'sin_revisar'"
+        },
+        "creado_en": {
+          "name": "creado_en",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "hallazgo_ficha_idx": {
+          "name": "hallazgo_ficha_idx",
+          "columns": [
+            {
+              "expression": "ficha_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "hallazgo_registro_idx": {
+          "name": "hallazgo_registro_idx",
+          "columns": [
+            {
+              "expression": "registro_indice_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "hallazgo_ficha_id_ficha_id_fk": {
+          "name": "hallazgo_ficha_id_ficha_id_fk",
+          "tableFrom": "hallazgo",
+          "tableTo": "ficha",
+          "columnsFrom": [
+            "ficha_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "hallazgo_registro_indice_id_registro_indice_id_fk": {
+          "name": "hallazgo_registro_indice_id_registro_indice_id_fk",
+          "tableFrom": "hallazgo",
+          "tableTo": "registro_indice",
+          "columnsFrom": [
+            "registro_indice_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "hallazgo_fuente_id_fuente_id_fk": {
+          "name": "hallazgo_fuente_id_fuente_id_fk",
+          "tableFrom": "hallazgo",
+          "tableTo": "fuente",
+          "columnsFrom": [
+            "fuente_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.modulo_guia": {
+      "name": "modulo_guia",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "slug": {
+          "name": "slug",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "idioma": {
+          "name": "idioma",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "titulo": {
+          "name": "titulo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "contenido_markdown": {
+          "name": "contenido_markdown",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "trigger": {
+          "name": "trigger",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'::jsonb"
+        },
+        "plantillas_carta": {
+          "name": "plantillas_carta",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'[]'::jsonb"
+        },
+        "enlaces_externos": {
+          "name": "enlaces_externos",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'[]'::jsonb"
+        },
+        "activo": {
+          "name": "activo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "actualizado_en": {
+          "name": "actualizado_en",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "modulo_slug_idioma_unique": {
+          "name": "modulo_slug_idioma_unique",
+          "columns": [
+            {
+              "expression": "slug",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "idioma",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.notificacion": {
+      "name": "notificacion",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "usuario_id": {
+          "name": "usuario_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ficha_id": {
+          "name": "ficha_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tipo": {
+          "name": "tipo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "leida": {
+          "name": "leida",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "datos": {
+          "name": "datos",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'::jsonb"
+        },
+        "creada_en": {
+          "name": "creada_en",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "notif_usuario_creada_idx": {
+          "name": "notif_usuario_creada_idx",
+          "columns": [
+            {
+              "expression": "usuario_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "creada_en",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "notificacion_usuario_id_usuario_id_fk": {
+          "name": "notificacion_usuario_id_usuario_id_fk",
+          "tableFrom": "notificacion",
+          "tableTo": "usuario",
+          "columnsFrom": [
+            "usuario_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "notificacion_ficha_id_ficha_id_fk": {
+          "name": "notificacion_ficha_id_ficha_id_fk",
+          "tableFrom": "notificacion",
+          "tableTo": "ficha",
+          "columnsFrom": [
+            "ficha_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.registro_indice": {
+      "name": "registro_indice",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "fuente_id": {
+          "name": "fuente_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nombre": {
+          "name": "nombre",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "apellido_1": {
+          "name": "apellido_1",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "apellido_2": {
+          "name": "apellido_2",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "nombre_fonetico": {
+          "name": "nombre_fonetico",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "apellido_fonetico": {
+          "name": "apellido_fonetico",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fecha_nacimiento_aprox": {
+          "name": "fecha_nacimiento_aprox",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "provincia_nacimiento": {
+          "name": "provincia_nacimiento",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "municipio_nacimiento": {
+          "name": "municipio_nacimiento",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fecha_desaparicion_aprox": {
+          "name": "fecha_desaparicion_aprox",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "provincia_desaparicion": {
+          "name": "provincia_desaparicion",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "municipio_desaparicion": {
+          "name": "municipio_desaparicion",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tipo_caso": {
+          "name": "tipo_caso",
+          "type": "tipo_caso",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'otro'"
+        },
+        "geom": {
+          "name": "geom",
+          "type": "geometry(Point, 4326)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "datos_completos": {
+          "name": "datos_completos",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'::jsonb"
+        },
+        "hash_dedup": {
+          "name": "hash_dedup",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ingestado_en": {
+          "name": "ingestado_en",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "registro_dedup_unique": {
+          "name": "registro_dedup_unique",
+          "columns": [
+            {
+              "expression": "fuente_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "hash_dedup",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "registro_nombre_idx": {
+          "name": "registro_nombre_idx",
+          "columns": [
+            {
+              "expression": "nombre",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "registro_apellido1_idx": {
+          "name": "registro_apellido1_idx",
+          "columns": [
+            {
+              "expression": "apellido_1",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "registro_provincia_nacim_idx": {
+          "name": "registro_provincia_nacim_idx",
+          "columns": [
+            {
+              "expression": "provincia_nacimiento",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "registro_tipo_caso_idx": {
+          "name": "registro_tipo_caso_idx",
+          "columns": [
+            {
+              "expression": "tipo_caso",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "registro_indice_fuente_id_fuente_id_fk": {
+          "name": "registro_indice_fuente_id_fuente_id_fk",
+          "tableFrom": "registro_indice",
+          "tableTo": "fuente",
+          "columnsFrom": [
+            "fuente_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.usuario": {
+      "name": "usuario",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nombre_mostrar": {
+          "name": "nombre_mostrar",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "idioma_preferido": {
+          "name": "idioma_preferido",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'es'"
+        },
+        "creado_en": {
+          "name": "creado_en",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "usuario_email_unique": {
+          "name": "usuario_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {
+    "public.estado_ficha": {
+      "name": "estado_ficha",
+      "schema": "public",
+      "values": [
+        "recien_creada",
+        "en_curso",
+        "con_hallazgos",
+        "cerrada"
+      ]
+    },
+    "public.estado_revision": {
+      "name": "estado_revision",
+      "schema": "public",
+      "values": [
+        "sin_revisar",
+        "confirmado_por_usuario",
+        "descartado_por_usuario"
+      ]
+    },
+    "public.rol_colaborador": {
+      "name": "rol_colaborador",
+      "schema": "public",
+      "values": [
+        "lectura",
+        "edicion",
+        "propietario"
+      ]
+    },
+    "public.tipo_caso": {
+      "name": "tipo_caso",
+      "schema": "public",
+      "values": [
+        "consejo_de_guerra",
+        "fosa",
+        "bdst",
+        "deportado_nazi",
+        "brigadista",
+        "exiliado",
+        "nino_evacuado",
+        "prision",
+        "responsabilidades_politicas",
+        "otro"
+      ]
+    },
+    "public.tipo_integracion": {
+      "name": "tipo_integracion",
+      "schema": "public",
+      "values": [
+        "indexada",
+        "redireccion_c1",
+        "scraping_futuro"
+      ]
+    },
+    "public.visibilidad": {
+      "name": "visibilidad",
+      "schema": "public",
+      "values": [
+        "privada",
+        "publica",
+        "publica_anonimizada"
+      ]
+    },
+    "public.visibilidad_sensible": {
+      "name": "visibilidad_sensible",
+      "schema": "public",
+      "values": [
+        "publico",
+        "solo_colaboradores"
+      ]
+    }
+  },
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
