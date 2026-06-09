@@ -210,7 +210,11 @@ Detalles técnicos resueltos:
 2. ~~i18n configurada y verificada en producción~~ ✅ hecho.
 3. ~~BD aprovisionada y migración aplicada~~ ✅ hecho.
 4. ~~Formulario guiado paso a paso (UI cliente, persistencia en sessionStorage)~~ ✅ hecho en local, pendiente de push: 6 pasos (identidad, familia, desaparición, contexto sensible con aviso, investigación, resumen), navegable, navegable, traducido a los 4 idiomas, botón de búsqueda deshabilitado con mensaje "próximamente".
-5. **Siguiente:** ingestor del primer dataset (**Catalunya ANC**, ~69.769 registros open data). Script TypeScript ejecutable que descarga, parsea, normaliza al esquema `registro_indice` y hace upsert. Validar contra una conexión a la BD de producción (NETLIFY_DATABASE_URL).
+5. ~~Ingestor del primer dataset (**Catalunya ANC**, ~69.834 registros open data)~~ ✅ código listo, pendiente de push:
+   - `web/src/lib/ingest/anc.ts`: paginación Socrata (5000/página), normalización al esquema (split de cognoms, inferencia de `tipo_caso` desde `tipus_procediment_1/2`, cálculo de `fechaNacimientoAprox` desde `any_inicial - edat`), upsert con `ON CONFLICT (fuente_id, hash_dedup) DO UPDATE`.
+   - `hash_dedup` = `codi` del ANC (ID único estable).
+   - Endpoint `POST /api/admin/ingest/anc` protegido por `INGEST_SECRET`. Acepta `?maxPages=N` y `?startOffset=N` para smoke tests y para trocear si el timeout de función no llega (60s).
+   - Antes del primer trigger en producción, hay que: (a) setear `INGEST_SECRET` en env vars de Netlify; (b) hacer push para desplegar. Después: `curl -X POST -H "x-ingest-secret: $TOKEN" ".../api/admin/ingest/anc?maxPages=1"` como smoke test.
 6. Auth.js (magic links con Resend) cuando se tenga cuenta de Resend.
 7. Persistir ficha del usuario en BD una vez haya auth.
 8. Implementar la búsqueda real sobre el índice cuando haya datos ingestados.
