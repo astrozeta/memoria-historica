@@ -10,6 +10,101 @@
     "ctaGuideTitle": "No sé per on començar",
     "ctaGuideDescription": "Et guiem pas a pas segons el cas del teu familiar."
   },
+  "wizard": {
+    "title": "Crear fitxa",
+    "intro": "Explica'ns el que sàpigues. No et preocupis si falten dades: cada peça ajuda, per petita que sigui.",
+    "progressLabel": "Pas {current} de {total}",
+    "stepNames": {
+      "identidad": "Identitat",
+      "familia": "Família",
+      "desaparicion": "Desaparició",
+      "contexto": "Context",
+      "investigacion": "Investigació",
+      "resumen": "Resum"
+    },
+    "steps": {
+      "identidad": {
+        "title": "A qui busques?",
+        "intro": "Comencem pel bàsic: nom i on va néixer el teu familiar."
+      },
+      "familia": {
+        "title": "La seva família",
+        "intro": "Els noms dels pares, parella o fills ajuden molt a confirmar la identitat quan apareixen registres semblants."
+      },
+      "desaparicion": {
+        "title": "La desaparició",
+        "intro": "Quan, on i en quines circumstàncies se'l va veure per última vegada. El que la teva família recordi, encara que sigui aproximat."
+      },
+      "contexto": {
+        "title": "Context polític i social",
+        "intro": "Aquesta informació és delicada. Si la teva fitxa és pública, podràs decidir si la vols mostrar.",
+        "sensitivityNotice": "Aquest bloc pot contenir dades sensibles. El tractem amb la mateixa cura que la resta i no el mostrem mai sense el teu permís."
+      },
+      "investigacion": {
+        "title": "El que ja saps",
+        "intro": "Si has investigat abans o tens una hipòtesi sobre el que va passar, explica-ho aquí. Ens ajuda a orientar la cerca."
+      },
+      "resumen": {
+        "title": "Resum de la fitxa",
+        "intro": "Revisa el que has emplenat. Pots tornar enrere per corregir qualsevol pas."
+      }
+    },
+    "fields": {
+      "nombre": "Nom",
+      "apellido1": "Primer cognom",
+      "apellido2": "Segon cognom",
+      "apodo": "Sobrenom o forma familiar",
+      "fechaNacimientoAprox": "Data de naixement (aproximada)",
+      "fechaNacimientoHint": "Any o dècada aproximada serveix.",
+      "provinciaNacimiento": "Província de naixement",
+      "municipioNacimiento": "Poble o ciutat de naixement",
+      "profesion": "Professió o ofici",
+      "padre": "Nom del pare",
+      "madre": "Nom de la mare",
+      "conyuge": "Cònjuge o parella",
+      "hijos": "Fills coneguts",
+      "estadoCivil": "Estat civil",
+      "fechaAprox": "Data aproximada de l'última vegada que se'l va veure",
+      "provincia": "Província",
+      "municipio": "Poble o ciutat",
+      "circunstancias": "Circumstàncies",
+      "circunstanciasHint": "Per exemple: detingut per…, portat a…, fugit a…, al front de…",
+      "testimonios": "Testimonis familiars",
+      "testimoniosHint": "El que s'ha explicat a casa, encara que siguin fragments solts.",
+      "afiliacion": "Afiliació política o sindical",
+      "bando": "Bàndol o simpaties",
+      "cargo": "Càrrec públic, militar o religiós",
+      "pistas": "Pistes que ja tens",
+      "busquedasPrevias": "Cerques que ja has fet",
+      "hipotesis": "La teva hipòtesi"
+    },
+    "bando": {
+      "republicano": "Republicà",
+      "nacional": "Nacional / revoltat",
+      "sin_definir": "Sense definir",
+      "desconocido": "No ho sé"
+    },
+    "placeholders": {
+      "selectBando": "Tria una opció"
+    },
+    "actions": {
+      "back": "Enrere",
+      "next": "Següent",
+      "finish": "Veure resum",
+      "search": "Cercar",
+      "clearAll": "Començar de zero",
+      "editStep": "Editar"
+    },
+    "summary": {
+      "empty": "Sense dades en aquest bloc.",
+      "noValue": "—",
+      "searchHint": "La cerca automàtica estarà disponible quan connectem els primers datasets. Mentrestant, la teva fitxa queda desada en aquest navegador.",
+      "searchDisabled": "Cerca pròximament"
+    },
+    "draft": {
+      "savedLocally": "Les teves respostes es desen en aquest navegador. Si tanques la pestanya, les recuperaràs en tornar."
+    }
+  },
   "common": {
     "loading": "Carregant…",
     "error": "Alguna cosa ha anat malament."

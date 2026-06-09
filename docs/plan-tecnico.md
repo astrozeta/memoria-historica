@@ -206,9 +206,13 @@ Detalles técnicos resueltos:
 
 ## 11. Siguientes pasos concretos
 
-1. Bocetar los wireframes en una herramienta visual (Figma, Excalidraw) — opcional pero útil.
-2. Arrancar el repo público: scaffolding Next.js 15 + TypeScript + Auth.js + conexión a Netlify DB + i18n con next-intl.
-3. Implementar el ingestor de **un solo dataset** como prueba de extremo a extremo. Sugerencia: **Catalunya ANC**, por ser el más grande y mejor estructurado de los confirmados como abiertos.
-4. Implementar el flujo de creación de ficha (formulario guiado) y la búsqueda básica contra el índice.
-5. Validar el flujo con el caso piloto (Luciano Herrera Calonge). Como Luciano no está en los datasets abiertos del MVP, este test valida el patrón **c1** (redirección a fuente externa) más que el índice propio.
-6. Iterar con más datasets (Euskadi víctimas, Andalucía, Valencia) y los módulos de guía dinámica por tipo de caso.
+1. ~~Scaffolding del repo~~ ✅ hecho.
+2. ~~i18n configurada y verificada en producción~~ ✅ hecho.
+3. ~~BD aprovisionada y migración aplicada~~ ✅ hecho.
+4. ~~Formulario guiado paso a paso (UI cliente, persistencia en sessionStorage)~~ ✅ hecho en local, pendiente de push: 6 pasos (identidad, familia, desaparición, contexto sensible con aviso, investigación, resumen), navegable, navegable, traducido a los 4 idiomas, botón de búsqueda deshabilitado con mensaje "próximamente".
+5. **Siguiente:** ingestor del primer dataset (**Catalunya ANC**, ~69.769 registros open data). Script TypeScript ejecutable que descarga, parsea, normaliza al esquema `registro_indice` y hace upsert. Validar contra una conexión a la BD de producción (NETLIFY_DATABASE_URL).
+6. Auth.js (magic links con Resend) cuando se tenga cuenta de Resend.
+7. Persistir ficha del usuario en BD una vez haya auth.
+8. Implementar la búsqueda real sobre el índice cuando haya datos ingestados.
+9. Iterar con más datasets (Euskadi víctimas, Andalucía, Valencia, +Catalunya deportados, +SIDBRINT, etc.) y módulos de guía dinámica por `tipo_caso`.
+10. Validar el flujo con el caso piloto Luciano Herrera Calonge (al no estar en datasets abiertos, valida el patrón c1 de redirección a fuente externa).

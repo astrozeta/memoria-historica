@@ -10,6 +10,101 @@
     "ctaGuideTitle": "Ez dakit nondik hasi",
     "ctaGuideDescription": "Zure senidearen kasuaren arabera, urratsez urrats gidatuko zaitugu."
   },
+  "wizard": {
+    "title": "Fitxa sortu",
+    "intro": "Konta iezaguzu dakizuna. Ez kezkatu daturik falta bada: zatitxo bakoitzak laguntzen du, txikia izanda ere.",
+    "progressLabel": "{total}-tik {current}. urratsa",
+    "stepNames": {
+      "identidad": "Nortasuna",
+      "familia": "Familia",
+      "desaparicion": "Desagerpena",
+      "contexto": "Testuingurua",
+      "investigacion": "Ikerketa",
+      "resumen": "Laburpena"
+    },
+    "steps": {
+      "identidad": {
+        "title": "Nor bilatzen duzu?",
+        "intro": "Has gaitezen oinarrizkoarekin: izena eta zure senidea non jaio zen."
+      },
+      "familia": {
+        "title": "Bere familia",
+        "intro": "Gurasoen, bikotekidearen edo seme-alaben izenek asko laguntzen dute nortasuna baieztatzen antzeko erregistroak agertzen direnean."
+      },
+      "desaparicion": {
+        "title": "Desagerpena",
+        "intro": "Noiz, non eta zer egoeretan ikusi zen azken aldiz. Zure familiak gogoratzen duena, gutxi gorabeherakoa izanda ere."
+      },
+      "contexto": {
+        "title": "Testuinguru politikoa eta soziala",
+        "intro": "Informazio hau hauskorra da. Zure fitxa publikoa bada, erakutsi nahi duzun erabaki ahal izango duzu.",
+        "sensitivityNotice": "Bloke honek datu hauskorrak izan ditzake. Beste guztiarekin bezalako arretaz tratatzen dugu eta inoiz ez dugu zure baimenik gabe erakusten."
+      },
+      "investigacion": {
+        "title": "Dagoeneko dakizuna",
+        "intro": "Lehenago ikertu baduzu edo gertatutakoaren inguruko hipotesirik baduzu, konta iezaguzu hemen. Bilaketa bideratzen laguntzen digu."
+      },
+      "resumen": {
+        "title": "Fitxaren laburpena",
+        "intro": "Begiratu bete duzuna. Edozein urrats zuzentzeko atzera egin dezakezu."
+      }
+    },
+    "fields": {
+      "nombre": "Izena",
+      "apellido1": "Lehen abizena",
+      "apellido2": "Bigarren abizena",
+      "apodo": "Goitizena edo familia-modua",
+      "fechaNacimientoAprox": "Jaiotza-data (gutxi gorabeherakoa)",
+      "fechaNacimientoHint": "Urtea edo gutxi gorabeherako hamarkada nahikoa da.",
+      "provinciaNacimiento": "Jaiotzako probintzia",
+      "municipioNacimiento": "Jaiotzako herria edo hiria",
+      "profesion": "Lanbidea",
+      "padre": "Aitaren izena",
+      "madre": "Amaren izena",
+      "conyuge": "Ezkontidea edo bikotekidea",
+      "hijos": "Seme-alaba ezagunak",
+      "estadoCivil": "Egoera zibila",
+      "fechaAprox": "Azken aldiz ikusi zeneko gutxi gorabeherako data",
+      "provincia": "Probintzia",
+      "municipio": "Herria edo hiria",
+      "circunstancias": "Egoerak",
+      "circunstanciasHint": "Adibidez: atxilotua…, eramana…, ihes egina…, frontean…",
+      "testimonios": "Familiaren lekukotzak",
+      "testimoniosHint": "Etxean kontatu izan dena, zatika ere bada ere.",
+      "afiliacion": "Afiliazio politikoa edo sindikala",
+      "bando": "Bandoa edo sinpatiak",
+      "cargo": "Kargu publikoa, militarra edo erlijiosoa",
+      "pistas": "Dituzun arrastoak",
+      "busquedasPrevias": "Egin dituzun bilaketak",
+      "hipotesis": "Zure hipotesia"
+    },
+    "bando": {
+      "republicano": "Errepublikanoa",
+      "nacional": "Nazionala / matxinatua",
+      "sin_definir": "Zehaztu gabea",
+      "desconocido": "Ez dakit"
+    },
+    "placeholders": {
+      "selectBando": "Aukeratu bat"
+    },
+    "actions": {
+      "back": "Atzera",
+      "next": "Hurrengoa",
+      "finish": "Ikusi laburpena",
+      "search": "Bilatu",
+      "clearAll": "Hasi hutsetik",
+      "editStep": "Editatu"
+    },
+    "summary": {
+      "empty": "Datu gabe bloke honetan.",
+      "noValue": "—",
+      "searchHint": "Bilaketa automatikoa eskuragarri egongo da lehen datu-multzoak konektatzen ditugunean. Bitartean, zure fitxa nabigatzaile honetan gordeta geratzen da.",
+      "searchDisabled": "Bilaketa laster"
+    },
+    "draft": {
+      "savedLocally": "Zure erantzunak nabigatzaile honetan gordetzen dira. Fitxa ixten baduzu, itzultzean berreskuratuko dituzu."
+    }
+  },
   "common": {
     "loading": "Kargatzen…",
     "error": "Zerbait gaizki joan da."

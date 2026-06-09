@@ -10,6 +10,101 @@
     "ctaGuideTitle": "Non sei por onde empezar",
     "ctaGuideDescription": "Guiámoste paso a paso segundo o caso do teu familiar."
   },
+  "wizard": {
+    "title": "Crear ficha",
+    "intro": "Cóntanos o que saibas. Non te preocupes se faltan datos: cada peza axuda, por pequena que sexa.",
+    "progressLabel": "Paso {current} de {total}",
+    "stepNames": {
+      "identidad": "Identidade",
+      "familia": "Familia",
+      "desaparicion": "Desaparición",
+      "contexto": "Contexto",
+      "investigacion": "Investigación",
+      "resumen": "Resumo"
+    },
+    "steps": {
+      "identidad": {
+        "title": "A quen buscas?",
+        "intro": "Empezamos polo básico: nome e onde naceu o teu familiar."
+      },
+      "familia": {
+        "title": "A súa familia",
+        "intro": "Os nomes dos pais, parella ou fillos axudan moito a confirmar a identidade cando aparecen rexistros parecidos."
+      },
+      "desaparicion": {
+        "title": "A desaparición",
+        "intro": "Cando, onde e en que circunstancias se viu por última vez. O que a túa familia lembre, aínda que sexa aproximado."
+      },
+      "contexto": {
+        "title": "Contexto político e social",
+        "intro": "Esta información é delicada. Se a túa ficha é pública, poderás decidir se queres mostrala.",
+        "sensitivityNotice": "Este bloque pode conter datos sensibles. Trátamolo co mesmo coidado que o resto e nunca o mostramos sen o teu permiso."
+      },
+      "investigacion": {
+        "title": "O que xa sabes",
+        "intro": "Se investigaches antes ou tes unha hipótese sobre o que aconteceu, cóntao aquí. Axúdanos a orientar a busca."
+      },
+      "resumen": {
+        "title": "Resumo da ficha",
+        "intro": "Revisa o que enchiches. Podes volver atrás para corrixir calquera paso."
+      }
+    },
+    "fields": {
+      "nombre": "Nome",
+      "apellido1": "Primeiro apelido",
+      "apellido2": "Segundo apelido",
+      "apodo": "Alcume ou forma familiar",
+      "fechaNacimientoAprox": "Data de nacemento (aproximada)",
+      "fechaNacimientoHint": "Ano ou década aproximada vale.",
+      "provinciaNacimiento": "Provincia de nacemento",
+      "municipioNacimiento": "Vila ou cidade de nacemento",
+      "profesion": "Profesión ou oficio",
+      "padre": "Nome do pai",
+      "madre": "Nome da nai",
+      "conyuge": "Cónxuxe ou parella",
+      "hijos": "Fillos coñecidos",
+      "estadoCivil": "Estado civil",
+      "fechaAprox": "Data aproximada da última vez que se viu",
+      "provincia": "Provincia",
+      "municipio": "Vila ou cidade",
+      "circunstancias": "Circunstancias",
+      "circunstanciasHint": "Por exemplo: detido por…, levado a…, fuxido a…, na fronte de…",
+      "testimonios": "Testemuños familiares",
+      "testimoniosHint": "O que se ten contado na casa, aínda que sexan fragmentos soltos.",
+      "afiliacion": "Afiliación política ou sindical",
+      "bando": "Bando ou simpatías",
+      "cargo": "Cargo público, militar ou relixioso",
+      "pistas": "Pistas que xa tes",
+      "busquedasPrevias": "Buscas que xa fixeches",
+      "hipotesis": "A túa hipótese"
+    },
+    "bando": {
+      "republicano": "Republicano",
+      "nacional": "Nacional / sublevado",
+      "sin_definir": "Sen definir",
+      "desconocido": "Non o sei"
+    },
+    "placeholders": {
+      "selectBando": "Elixe unha opción"
+    },
+    "actions": {
+      "back": "Atrás",
+      "next": "Seguinte",
+      "finish": "Ver resumo",
+      "search": "Buscar",
+      "clearAll": "Empezar de cero",
+      "editStep": "Editar"
+    },
+    "summary": {
+      "empty": "Sen datos neste bloque.",
+      "noValue": "—",
+      "searchHint": "A busca automática estará dispoñible cando conectemos os primeiros datasets. Mentres tanto, a túa ficha queda gardada neste navegador.",
+      "searchDisabled": "Busca proximamente"
+    },
+    "draft": {
+      "savedLocally": "As túas respostas gárdanse neste navegador. Se pechas a pestana, recuperaralas ao volver."
+    }
+  },
   "common": {
     "loading": "Cargando…",
     "error": "Algo saíu mal."

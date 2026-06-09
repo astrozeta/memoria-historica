@@ -15,6 +15,7 @@ Aplicación web pública y sin ánimo de lucro para ayudar a familiares de perso
 
 ## Reglas para futuras sesiones
 
+- **No agotar los build minutes de Netlify (free tier).** Cada push a `main` dispara un build remoto. Validar siempre en local antes (`pnpm typecheck`, `pnpm build`, `pnpm dev`), agrupar varios commits en un solo push significativo, y usar `[skip ci]` en el commit message cuando el cambio sea solo de `docs/`, `README.md` o cosas que no necesitan redeploy. No hacer commits vacíos para "disparar deploy" salvo necesidad real.
 - **Mantener la documentación viva.** Siempre que se tome una decisión nueva, se cierre una pendiente, se avance en el roadmap, se descarte una hipótesis o cambie el alcance, actualizar el documento correspondiente en el mismo turno. La documentación debe reflejar el estado actual del proyecto en todo momento, no quedarse desfasada.
 - **No empezar a construir código** hasta completar los pasos pendientes del roadmap (auditoría de fuentes + plan técnico + wireframes).
 - Antes de proponer cambios al alcance, revisar `decisiones.md` — muchas decisiones ya se tomaron con justificación; no reabrir sin motivo nuevo.

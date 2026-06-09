@@ -36,7 +36,15 @@ Modelo de datos conceptual definido (Usuario, Ficha, Colaborador, Hallazgo, Fuen
 
 **Decisiones técnicas pendientes** (sección 9 del plan): dominio, inclusión o no de Todos los Nombres, Supabase vs Neon, repo público desde el inicio.
 
-## Paso 3 — MVP acotado
+## Paso 3 — MVP acotado (en curso)
+
+- ✅ Repo público + sitio en producción (https://memoria-historica.netlify.app).
+- ✅ Netlify DB aprovisionada con la migración inicial aplicada.
+- ✅ Página de bienvenida traducida en es/ca/gl/eu.
+- ✅ Formulario guiado de creación de ficha (`/buscar`): 6 pasos, persistencia local, traducido. Pendiente de push.
+- 🔜 Ingestor del primer dataset (Catalunya ANC).
+- 🔜 Auth.js con magic links (Resend) y persistencia de ficha en BD.
+- 🔜 Búsqueda real sobre el índice cuando haya datos.
 
 MVP enfocado en **una sola provincia o un solo tipo de represión** como caso piloto, usando a Luciano Herrera Calonge como prueba real de extremo a extremo.
 

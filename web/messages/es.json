@@ -10,6 +10,101 @@
     "ctaGuideTitle": "No sé por dónde empezar",
     "ctaGuideDescription": "Te guiamos paso a paso según el caso de tu familiar."
   },
+  "wizard": {
+    "title": "Crear ficha",
+    "intro": "Cuéntanos lo que sepas. No te preocupes si faltan datos: cada pieza ayuda, por pequeña que sea.",
+    "progressLabel": "Paso {current} de {total}",
+    "stepNames": {
+      "identidad": "Identidad",
+      "familia": "Familia",
+      "desaparicion": "Desaparición",
+      "contexto": "Contexto",
+      "investigacion": "Investigación",
+      "resumen": "Resumen"
+    },
+    "steps": {
+      "identidad": {
+        "title": "¿A quién buscas?",
+        "intro": "Empezamos por lo básico: nombre y dónde nació tu familiar."
+      },
+      "familia": {
+        "title": "Su familia",
+        "intro": "Los nombres de padres, pareja o hijos ayudan mucho a confirmar identidad cuando aparecen registros parecidos."
+      },
+      "desaparicion": {
+        "title": "La desaparición",
+        "intro": "Cuándo, dónde y en qué circunstancias se le vio por última vez. Lo que tu familia recuerde, aunque sea aproximado."
+      },
+      "contexto": {
+        "title": "Contexto político y social",
+        "intro": "Esta información es delicada. Si tu ficha es pública, podrás decidir si quieres mostrarla.",
+        "sensitivityNotice": "Este bloque puede contener datos sensibles. Lo tratamos con el mismo cuidado que el resto y nunca lo mostramos sin tu permiso."
+      },
+      "investigacion": {
+        "title": "Lo que ya sabes",
+        "intro": "Si has investigado antes o tienes una hipótesis sobre lo que ocurrió, cuéntanos aquí. Nos ayuda a orientar la búsqueda."
+      },
+      "resumen": {
+        "title": "Resumen de la ficha",
+        "intro": "Revisa lo que has rellenado. Puedes volver atrás para corregir cualquier paso."
+      }
+    },
+    "fields": {
+      "nombre": "Nombre",
+      "apellido1": "Primer apellido",
+      "apellido2": "Segundo apellido",
+      "apodo": "Apodo o forma familiar",
+      "fechaNacimientoAprox": "Fecha de nacimiento (aproximada)",
+      "fechaNacimientoHint": "Año o década aproximada vale.",
+      "provinciaNacimiento": "Provincia de nacimiento",
+      "municipioNacimiento": "Pueblo o ciudad de nacimiento",
+      "profesion": "Profesión u oficio",
+      "padre": "Nombre del padre",
+      "madre": "Nombre de la madre",
+      "conyuge": "Cónyuge o pareja",
+      "hijos": "Hijos conocidos",
+      "estadoCivil": "Estado civil",
+      "fechaAprox": "Fecha aproximada en que se le vio por última vez",
+      "provincia": "Provincia",
+      "municipio": "Pueblo o ciudad",
+      "circunstancias": "Circunstancias",
+      "circunstanciasHint": "Por ejemplo: detenido por…, llevado a…, huido a…, en el frente de…",
+      "testimonios": "Testimonios familiares",
+      "testimoniosHint": "Lo que se ha contado en casa, aunque sean fragmentos sueltos.",
+      "afiliacion": "Afiliación política o sindical",
+      "bando": "Bando o simpatías",
+      "cargo": "Cargo público, militar o religioso",
+      "pistas": "Pistas que ya tienes",
+      "busquedasPrevias": "Búsquedas que ya has hecho",
+      "hipotesis": "Tu hipótesis"
+    },
+    "bando": {
+      "republicano": "Republicano",
+      "nacional": "Nacional / sublevado",
+      "sin_definir": "Sin definir",
+      "desconocido": "No lo sé"
+    },
+    "placeholders": {
+      "selectBando": "Elige una opción"
+    },
+    "actions": {
+      "back": "Atrás",
+      "next": "Siguiente",
+      "finish": "Ver resumen",
+      "search": "Buscar",
+      "clearAll": "Empezar de cero",
+      "editStep": "Editar"
+    },
+    "summary": {
+      "empty": "Sin datos en este bloque.",
+      "noValue": "—",
+      "searchHint": "La búsqueda automática estará disponible en cuanto conectemos los primeros datasets. Mientras tanto, tu ficha queda guardada en este navegador.",
+      "searchDisabled": "Búsqueda próximamente"
+    },
+    "draft": {
+      "savedLocally": "Tus respuestas se guardan en este navegador. Si cierras la pestaña, las recuperarás al volver."
+    }
+  },
   "common": {
     "loading": "Cargando…",
     "error": "Algo ha salido mal."
