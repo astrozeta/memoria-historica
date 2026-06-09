@@ -97,9 +97,17 @@
     },
     "summary": {
       "empty": "Sen datos neste bloque.",
-      "noValue": "—",
-      "searchHint": "A busca automática estará dispoñible cando conectemos os primeiros datasets. Mentres tanto, a túa ficha queda gardada neste navegador.",
-      "searchDisabled": "Busca proximamente"
+      "noValue": "—"
+    },
+    "search": {
+      "hint": "Cando lances a busca, mostraremos aquí as coincidencias nos arquivos dispoñibles.",
+      "searching": "Buscando…",
+      "errorTitle": "Erro",
+      "resultsTitle": "{count, plural, =0 {Sen coincidencias} =1 {1 posible coincidencia} other {# posibles coincidencias}}",
+      "noResults": "Non atopamos coincidencias claras. Revisa a ortografía do nome ou proba con menos datos.",
+      "score": "Confianza",
+      "source": "Fonte",
+      "viewSource": "Ver na fonte orixinal"
     },
     "draft": {
       "savedLocally": "As túas respostas gárdanse neste navegador. Se pechas a pestana, recuperaralas ao volver."

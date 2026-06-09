@@ -13,6 +13,25 @@ import {
 } from '@/lib/ficha';
 import {Link} from '@/i18n/navigation';
 
+type SearchResult = {
+  id: string;
+  score: number;
+  nombre: string | null;
+  apellido1: string | null;
+  apellido2: string | null;
+  fechaNacimientoAprox: string | null;
+  provinciaNacimiento: string | null;
+  municipioNacimiento: string | null;
+  fechaDesaparicionAprox: string | null;
+  provinciaDesaparicion: string | null;
+  municipioDesaparicion: string | null;
+  tipoCaso: string;
+  fuenteNombre: string;
+  fuenteUrl: string;
+  fuenteOrganismo: string | null;
+  fuenteLicencia: string | null;
+};
+
 type Section = keyof FichaDraft;
 
 type Action =
@@ -67,6 +86,9 @@ export default function BuscarWizard() {
   const [draft, dispatch] = useReducer(reducer, emptyFichaDraft);
   const [stepIdx, setStepIdx] = useState(0);
   const [hydrated, setHydrated] = useState(false);
+  const [searching, setSearching] = useState(false);
+  const [results, setResults] = useState<SearchResult[] | null>(null);
+  const [searchError, setSearchError] = useState<string | null>(null);
 
   // Hidratar desde sessionStorage tras montar (evita mismatch SSR).
   useEffect(() => {
@@ -96,7 +118,46 @@ export default function BuscarWizard() {
     }
     dispatch({type: 'reset'});
     setStepIdx(0);
+    setResults(null);
+    setSearchError(null);
   };
+
+  const doSearch = async () => {
+    const body = {
+      nombre: draft.identidad.nombre,
+      apellido1: draft.identidad.apellido1,
+      apellido2: draft.identidad.apellido2,
+      provincia:
+        draft.desaparicion.provincia ?? draft.identidad.provinciaNacimiento
+    };
+    setSearching(true);
+    setSearchError(null);
+    setResults(null);
+    try {
+      const res = await fetch('/api/buscar', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(body)
+      });
+      const data = (await res.json()) as
+        | {ok: true; results: SearchResult[]; total: number}
+        | {ok: false; error: string};
+      if (!data.ok) {
+        setSearchError(data.error);
+      } else {
+        setResults(data.results);
+      }
+    } catch (err) {
+      setSearchError(err instanceof Error ? err.message : String(err));
+    } finally {
+      setSearching(false);
+    }
+  };
+
+  const canSearch =
+    !!(draft.identidad.nombre ||
+      draft.identidad.apellido1 ||
+      draft.identidad.apellido2);
 
   const setField = (section: Section, field: string) => (value: string) =>
     dispatch({
@@ -233,7 +294,15 @@ export default function BuscarWizard() {
             </div>
           )}
 
-          {stepId === 'resumen' && <Summary draft={draft} onEdit={goTo} />}
+          {stepId === 'resumen' && (
+            <Summary
+              draft={draft}
+              onEdit={goTo}
+              results={results}
+              searching={searching}
+              searchError={searchError}
+            />
+          )}
         </section>
 
         <p className="text-xs text-zinc-500 dark:text-zinc-500">
@@ -271,11 +340,11 @@ export default function BuscarWizard() {
             {stepIdx === totalSteps - 1 && (
               <button
                 type="button"
-                disabled
-                title={t('summary.searchDisabled')}
-                className="rounded-full bg-zinc-300 px-5 py-2 text-sm font-medium text-zinc-600 cursor-not-allowed dark:bg-zinc-800 dark:text-zinc-500"
+                onClick={doSearch}
+                disabled={!canSearch || searching}
+                className="rounded-full bg-zinc-900 px-5 py-2 text-sm font-medium text-white hover:bg-zinc-700 disabled:cursor-not-allowed disabled:bg-zinc-300 disabled:text-zinc-600 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200 dark:disabled:bg-zinc-800 dark:disabled:text-zinc-500"
               >
-                {t('actions.search')}
+                {searching ? t('search.searching') : t('actions.search')}
               </button>
             )}
           </div>
@@ -396,10 +465,16 @@ function SelectField({
 
 function Summary({
   draft,
-  onEdit
+  onEdit,
+  results,
+  searching,
+  searchError
 }: {
   draft: FichaDraft;
   onEdit: (id: (typeof STEP_ORDER)[number]) => void;
+  results: SearchResult[] | null;
+  searching: boolean;
+  searchError: string | null;
 }) {
   const t = useTranslations('wizard');
   const tField = useTranslations('wizard.fields');
@@ -464,11 +539,83 @@ function Summary({
     [draft, tField, tBando]
   );
 
+  const tSearch = useTranslations('wizard.search');
+
   return (
     <div className="flex flex-col gap-6">
-      <p className="rounded-lg border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm text-zinc-700 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300">
-        {t('summary.searchHint')}
-      </p>
+      {results === null && !searching && !searchError && (
+        <p className="rounded-lg border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm text-zinc-700 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300">
+          {tSearch('hint')}
+        </p>
+      )}
+
+      {searching && (
+        <p className="rounded-lg border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm text-zinc-700 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300">
+          {tSearch('searching')}
+        </p>
+      )}
+
+      {searchError && (
+        <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800 dark:border-red-900/50 dark:bg-red-950/30 dark:text-red-200">
+          <strong>{tSearch('errorTitle')}:</strong> {searchError}
+        </div>
+      )}
+
+      {results !== null && !searching && (
+        <div className="flex flex-col gap-3">
+          <h3 className="text-sm font-semibold uppercase tracking-wide text-zinc-700 dark:text-zinc-300">
+            {tSearch('resultsTitle', {count: results.length})}
+          </h3>
+          {results.length === 0 ? (
+            <p className="text-sm text-zinc-600 dark:text-zinc-400">
+              {tSearch('noResults')}
+            </p>
+          ) : (
+            <ul className="flex flex-col gap-3">
+              {results.map((r) => (
+                <li
+                  key={r.id}
+                  className="rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex flex-col gap-1">
+                      <span className="text-sm font-semibold text-zinc-900 dark:text-zinc-50">
+                        {[r.nombre, r.apellido1, r.apellido2]
+                          .filter(Boolean)
+                          .join(' ') || '—'}
+                      </span>
+                      <span className="text-xs text-zinc-500 dark:text-zinc-400">
+                        {[r.municipioNacimiento, r.provinciaNacimiento]
+                          .filter(Boolean)
+                          .join(', ')}
+                        {r.fechaDesaparicionAprox
+                          ? ` · ${r.fechaDesaparicionAprox}`
+                          : ''}
+                        {r.tipoCaso && r.tipoCaso !== 'otro' ? ` · ${r.tipoCaso}` : ''}
+                      </span>
+                      <span className="text-xs text-zinc-500 dark:text-zinc-400">
+                        {tSearch('source')}: {r.fuenteNombre}
+                        {r.fuenteOrganismo ? ` (${r.fuenteOrganismo})` : ''}
+                      </span>
+                    </div>
+                    <span className="text-xs rounded-full bg-zinc-100 px-2 py-1 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
+                      {tSearch('score')} {(r.score * 100).toFixed(0)}%
+                    </span>
+                  </div>
+                  <a
+                    href={r.fuenteUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-2 inline-block text-xs text-zinc-600 underline hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+                  >
+                    {tSearch('viewSource')} →
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
 
       {sections.map((sec) => {
         const empty = !hasAnyValue(draft[sec.id] as Record<string, unknown>);

@@ -97,9 +97,17 @@
     },
     "summary": {
       "empty": "Sense dades en aquest bloc.",
-      "noValue": "—",
-      "searchHint": "La cerca automàtica estarà disponible quan connectem els primers datasets. Mentrestant, la teva fitxa queda desada en aquest navegador.",
-      "searchDisabled": "Cerca pròximament"
+      "noValue": "—"
+    },
+    "search": {
+      "hint": "Quan llancis la cerca, mostrarem aquí les coincidències als arxius disponibles.",
+      "searching": "Cercant…",
+      "errorTitle": "Error",
+      "resultsTitle": "{count, plural, =0 {Sense coincidències} =1 {1 possible coincidència} other {# possibles coincidències}}",
+      "noResults": "No hem trobat coincidències clares. Revisa l'ortografia del nom o prova amb menys dades.",
+      "score": "Confiança",
+      "source": "Font",
+      "viewSource": "Veure a la font original"
     },
     "draft": {
       "savedLocally": "Les teves respostes es desen en aquest navegador. Si tanques la pestanya, les recuperaràs en tornar."

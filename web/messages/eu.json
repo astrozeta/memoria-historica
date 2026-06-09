@@ -97,9 +97,17 @@
     },
     "summary": {
       "empty": "Datu gabe bloke honetan.",
-      "noValue": "—",
-      "searchHint": "Bilaketa automatikoa eskuragarri egongo da lehen datu-multzoak konektatzen ditugunean. Bitartean, zure fitxa nabigatzaile honetan gordeta geratzen da.",
-      "searchDisabled": "Bilaketa laster"
+      "noValue": "—"
+    },
+    "search": {
+      "hint": "Bilaketa abiarazten duzunean, eskuragarri dauden artxiboetan aurkitutako bat-etortzeak erakutsiko ditugu hemen.",
+      "searching": "Bilatzen…",
+      "errorTitle": "Errorea",
+      "resultsTitle": "{count, plural, =0 {Bat-etortzerik ez} =1 {1 bat-etortze posible} other {# bat-etortze posible}}",
+      "noResults": "Ez dugu argi dagoen bat-etortzerik aurkitu. Errepasatu izenaren ortografia edo saiatu datu gutxiagorekin.",
+      "score": "Konfiantza",
+      "source": "Iturria",
+      "viewSource": "Ikusi jatorrizko iturrian"
     },
     "draft": {
       "savedLocally": "Zure erantzunak nabigatzaile honetan gordetzen dira. Fitxa ixten baduzu, itzultzean berreskuratuko dituzu."
