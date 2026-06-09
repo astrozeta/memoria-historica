@@ -1,0 +1,23 @@
+# Configuración de build para Netlify (monorepo: el código vive en web/).
+
+[build]
+  # Directorio base donde está el package.json y desde el que se ejecutan los
+  # comandos. Imprescindible para que Netlify encuentre el proyecto Next.js.
+  base = "web"
+
+  # pnpm 11 sale con exit 1 cuando hay "ignored build scripts", aunque los
+  # hayamos listado en pnpm.onlyBuiltDependencies del package.json. La flag
+  # --ignore-scripts evita ese comportamiento estricto durante la fase de
+  # install en CI.
+  #
+  # Trade-off: sharp y otros binarios nativos no se compilan. No es crítico en
+  # esta fase del MVP (la página de bienvenida no usa optimización de imagen).
+  # Si más adelante se necesita sharp en producción, se ajusta este comando.
+  command = "pnpm install --ignore-scripts && pnpm run build"
+
+  # Relativo a `base`, por lo que apunta a web/.next.
+  publish = ".next"
+
+[build.environment]
+  # Node 24 (LTS) para consistencia con el entorno local.
+  NODE_VERSION = "24"
