@@ -42,7 +42,7 @@ Modelo de datos conceptual definido (Usuario, Ficha, Colaborador, Hallazgo, Fuen
 - ✅ Netlify DB aprovisionada con la migración inicial aplicada.
 - ✅ Página de bienvenida traducida en es/ca/gl/eu.
 - ✅ Formulario guiado de creación de ficha (`/buscar`): 6 pasos, persistencia local, traducido. Pendiente de push.
-- 🔜 Ingestor del primer dataset (Catalunya ANC).
+- ✅ Ingestores de Catalunya ANC (~69.834) y Euskadi víctimas (Gogora, ~50k). Endpoints admin protegidos por `INGEST_SECRET`. Pendientes de push.
 - 🔜 Auth.js con magic links (Resend) y persistencia de ficha en BD.
 - 🔜 Búsqueda real sobre el índice cuando haya datos.
 
