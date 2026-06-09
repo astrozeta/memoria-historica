@@ -2,13 +2,16 @@ import {drizzle} from 'drizzle-orm/node-postgres';
 import {Pool} from 'pg';
 import * as schema from './schema';
 
-const connectionString = process.env.DATABASE_URL;
+// Netlify DB inyecta NETLIFY_DATABASE_URL automáticamente en producción.
+// Para desarrollo local con otra BD, también se acepta DATABASE_URL.
+const connectionString =
+  process.env.NETLIFY_DATABASE_URL ?? process.env.DATABASE_URL;
 
 if (!connectionString) {
   // No lanzamos aquí en el módulo top-level para no romper builds sin BD configurada.
   // El error se manifestará al primer query si la URL falta.
   console.warn(
-    '[db] DATABASE_URL no está definida. La conexión fallará al primer query.'
+    '[db] Ni NETLIFY_DATABASE_URL ni DATABASE_URL están definidas. La conexión fallará al primer query.'
   );
 }
 

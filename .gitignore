@@ -54,3 +54,6 @@ data/tmp/
 
 # Sentry / observabilidad
 .sentryclirc
+
+# Local Netlify folder
+.netlify
