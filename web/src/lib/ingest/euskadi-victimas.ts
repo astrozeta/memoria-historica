@@ -177,11 +177,14 @@ export type IngestResult = {
 };
 
 export async function ingest({
-  maxRows
-}: {maxRows?: number} = {}): Promise<IngestResult> {
+  maxRows,
+  startOffset = 0
+}: {maxRows?: number; startOffset?: number} = {}): Promise<IngestResult> {
   const fuente = await ensureFuente();
   const all = await fetchAll();
-  const slice = typeof maxRows === 'number' ? all.slice(0, maxRows) : all;
+  const end =
+    typeof maxRows === 'number' ? startOffset + maxRows : all.length;
+  const slice = all.slice(startOffset, end);
 
   let rowsNormalized = 0;
   let rowsInsertedOrUpdated = 0;

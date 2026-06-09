@@ -27,17 +27,23 @@ export async function POST(req: Request) {
 
   const url = new URL(req.url);
   const maxRowsParam = url.searchParams.get('maxRows');
+  const startOffsetParam = url.searchParams.get('startOffset');
   const maxRows = maxRowsParam ? parseInt(maxRowsParam, 10) : undefined;
-  if (maxRows !== undefined && (Number.isNaN(maxRows) || maxRows < 1)) {
+  const startOffset = startOffsetParam ? parseInt(startOffsetParam, 10) : 0;
+  if (
+    (maxRows !== undefined && (Number.isNaN(maxRows) || maxRows < 1)) ||
+    Number.isNaN(startOffset) ||
+    startOffset < 0
+  ) {
     return NextResponse.json(
-      {ok: false, error: 'maxRows inválido'},
+      {ok: false, error: 'parámetros inválidos'},
       {status: 400}
     );
   }
 
   const startedAt = Date.now();
   try {
-    const result = await ingest({maxRows});
+    const result = await ingest({maxRows, startOffset});
     return NextResponse.json({
       ok: true,
       durationMs: Date.now() - startedAt,
