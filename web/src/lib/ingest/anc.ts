@@ -8,6 +8,10 @@ import {db, schema} from '@/db';
 const SOCRATA_BASE =
   'https://analisi.transparenciacatalunya.cat/resource/3bjt-k7vu.json';
 const PAGE_SIZE = 5000;
+// Chunk para los INSERT: Postgres tiene un límite de ~65535 parámetros por
+// statement. Con ~14 columnas por fila, 1000 filas ≈ 14000 parámetros, muy
+// por debajo del límite y con margen para crecer el schema.
+const INSERT_CHUNK_SIZE = 1000;
 const FUENTE_SLUG = 'anc-llista-reparacio-juridica';
 
 type AncRow = {
@@ -209,10 +213,11 @@ export async function ingest({
       .filter((r): r is NormalizedRow => r !== null);
     rowsNormalized += normalized.length;
 
-    if (normalized.length > 0) {
+    for (let i = 0; i < normalized.length; i += INSERT_CHUNK_SIZE) {
+      const chunk = normalized.slice(i, i + INSERT_CHUNK_SIZE);
       const inserted = await db
         .insert(schema.registroIndice)
-        .values(normalized)
+        .values(chunk)
         .onConflictDoUpdate({
           target: [
             schema.registroIndice.fuenteId,
